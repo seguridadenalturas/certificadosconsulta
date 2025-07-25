@@ -50,8 +50,7 @@
     <button onclick="verificar()">Consultar</button>
     <div class="resultado" id="resultado"></div>
   </div>
-
-  <script>
+<script>
     const certificados = {
       "1075878649": {
         nombre: "Sebastián Felipe Villarraga Rincón",
@@ -64,18 +63,21 @@
     function verificar() {
       const doc = document.getElementById("documento").value.trim();
       const resultado = document.getElementById("resultado");
-      console.log("Documento ingresado:", doc);
 
       if (certificados[doc]) {
         const cert = certificados[doc];
-        resultado.innerHTML = `
-          <div class="valido">
-            <p><strong>✅ Certificado encontrado</strong></p>
-            <p><strong>Nombre:</strong> ${cert.nombre}</p>
-            <p><strong>Curso:</strong> ${cert.curso}</p>
-            <p><strong>Fecha:</strong> ${cert.fecha}</p>
-            <iframe src="${cert.pdf}"></iframe>
-          </div>
-        `;
+        resultado.innerHTML = 
+          <p><strong>✅ Certificado encontrado</strong></p>
+          <p><strong>Nombre:</strong> ${cert.nombre}</p>
+          <p><strong>Curso:</strong> ${cert.curso}</p>
+          <p><strong>Fecha:</strong> ${cert.fecha}</p>
+          <iframe src="${cert.pdf}"></iframe>
+        ;
       } else {
-        resultado.innerHTML = `<p class="invalido">❌ No se encontr
+        resultado.innerHTML = <p style="color:red;">❌ No se encontró ningún certificado con ese documento.</p>;
+      }
+    }
+  </script>
+</body>
+</html>
+   
