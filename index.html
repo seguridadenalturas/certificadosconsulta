@@ -66,15 +66,15 @@
 
       if (certificados[doc]) {
         const cert = certificados[doc];
-        resultado.innerHTML = 
-          <p><strong>✅ Certificado encontrado</strong></p>
-          <p><strong>Nombre:</strong> ${cert.nombre}</p>
-          <p><strong>Curso:</strong> ${cert.curso}</p>
-          <p><strong>Fecha:</strong> ${cert.fecha}</p>
-          <iframe src="${cert.pdf}"></iframe>
-        ;
+        resultado.innerHTML = `
+  <p><strong>✅ Certificado encontrado</strong></p>
+  <p><strong>Nombre:</strong> ${cert.nombre}</p>
+  <p><strong>Curso:</strong> ${cert.curso}</p>
+  <p><strong>Fecha:</strong> ${cert.fecha}</p>
+  <iframe src="${cert.pdf}"></iframe>
+`;
       } else {
-        resultado.innerHTML = <p style="color:red;">❌ No se encontró ningún certificado con ese documento.</p>;
+        resultado.innerHTML = `<p style="color:red;">❌ No se encontró ningún certificado con ese documento.</p>`;
       }
     }
   </script>
