@@ -2,113 +2,80 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Verificación de Certificados | Alturtec SAS</title>
+  <title>Verificación de Certificados</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f0f4f8;
-      padding: 40px;
+      background-color: #f4f4f4;
+      padding: 30px;
       text-align: center;
     }
-
     .container {
       background: white;
-      padding: 30px;
+      padding: 20px;
       max-width: 600px;
       margin: auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    h1 {
-      color: #003865;
-    }
-
-    input[type="text"] {
-      width: 80%;
+    input {
       padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      margin-bottom: 20px;
+      width: 80%;
+      margin-bottom: 10px;
     }
-
     button {
       padding: 10px 20px;
-      background: #003865;
+      background: #007bff;
       color: white;
       border: none;
-      border-radius: 6px;
+      border-radius: 5px;
       cursor: pointer;
     }
-
-    button:hover {
-      background: #00509e;
-    }
-
     .resultado {
-      margin-top: 30px;
+      margin-top: 20px;
     }
-
     iframe {
       width: 100%;
       height: 600px;
-      border: none;
       margin-top: 20px;
     }
-
-    .valido { color: green; }
-    .invalido { color: red; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Verificación de Certificados</h1>
-    <p>Ingrese su número de documento para consultar su certificado:</p>
-
-    <input type="text" id="documento" placeholder="Ej: 123456789">
+    <h2>Consulta de Certificado</h2>
+    <p>Ingrese su número de documento</p>
+    <input type="text" id="documento" placeholder="Ej. 1075878649">
     <br>
     <button onclick="verificar()">Consultar</button>
-
     <div class="resultado" id="resultado"></div>
   </div>
 
   <script>
-    // Diccionario de certificados válidos
     const certificados = {
       "1075878649": {
         nombre: "Sebastián Felipe Villarraga Rincón",
         curso: "Trabajo Seguro en Alturas",
-        fecha: "30 de Abril de 2024",
+        fecha: "30 de abril de 2024",
         pdf: "certificadoalturas.pdf"
       }
     };
 
-    // Función de verificación
     function verificar() {
-      const input = document.getElementById("documento");
-      const doc = input.value.trim();
+      const doc = document.getElementById("documento").value.trim();
       const resultado = document.getElementById("resultado");
 
-      console.log("Documento ingresado:", doc);  // Para debug
-
-      if (doc === "") {
-        resultado.innerHTML = `<p class="invalido">❌ Por favor ingrese un número de documento.</p>`;
-        return;
-      }
-
-      if (certificados.hasOwnProperty(doc)) {
+      if (certificados[doc]) {
         const cert = certificados[doc];
         resultado.innerHTML = `
-          <div class="valido">
-            <p><strong>✅ Certificado encontrado</strong></p>
-            <p><strong>Nombre:</strong> ${cert.nombre}</p>
-            <p><strong>Curso:</strong> ${cert.curso}</p>
-            <p><strong>Fecha:</strong> ${cert.fecha}</p>
-            <iframe src="${cert.pdf}"></iframe>
-          </div>
+          <p><strong>✅ Certificado encontrado</strong></p>
+          <p><strong>Nombre:</strong> ${cert.nombre}</p>
+          <p><strong>Curso:</strong> ${cert.curso}</p>
+          <p><strong>Fecha:</strong> ${cert.fecha}</p>
+          <iframe src="${cert.pdf}"></iframe>
         `;
       } else {
-        resultado.innerHTML = `<p class="invalido">❌ No se encontró ningún certificado para el documento ingresado.</p>`;
+        resultado.innerHTML = `<p style="color:red;">❌ No se encontró ningún certificado con ese documento.</p>`;
       }
     }
   </script>
