@@ -73,22 +73,44 @@
   </div>
 
   <script>
+    // Diccionario de certificados válidos
     const certificados = {
       "1075878649": {
-        nombre: "Sebastián Felipe Villarraga",
+        nombre: "Sebastián Felipe Villarraga Rincón",
         curso: "Trabajo Seguro en Alturas",
-        fecha: "24 de julio de 2025",
+        fecha: "30 de Abril de 2024",
         pdf: "certificadoalturas.pdf"
       }
     };
 
+    // Función de verificación
     function verificar() {
-      const doc = document.getElementById("documento").value.trim();
+      const input = document.getElementById("documento");
+      const doc = input.value.trim();
       const resultado = document.getElementById("resultado");
+
+      console.log("Documento ingresado:", doc);  // Para debug
+
+      if (doc === "") {
+        resultado.innerHTML = `<p class="invalido">❌ Por favor ingrese un número de documento.</p>`;
+        return;
+      }
 
       if (certificados.hasOwnProperty(doc)) {
         const cert = certificados[doc];
         resultado.innerHTML = `
           <div class="valido">
             <p><strong>✅ Certificado encontrado</strong></p>
-            <p><stro
+            <p><strong>Nombre:</strong> ${cert.nombre}</p>
+            <p><strong>Curso:</strong> ${cert.curso}</p>
+            <p><strong>Fecha:</strong> ${cert.fecha}</p>
+            <iframe src="${cert.pdf}"></iframe>
+          </div>
+        `;
+      } else {
+        resultado.innerHTML = `<p class="invalido">❌ No se encontró ningún certificado para el documento ingresado.</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
